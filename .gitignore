@@ -23,9 +23,10 @@ yarn-error.log*
 .env.local
 *.local
 
-# Editor and System Files
+# Editor, AI, and System Files
 .vscode/*
 !.vscode/extensions.json
 .idea/
 .DS_Store
 Thumbs.db
+.claude/
