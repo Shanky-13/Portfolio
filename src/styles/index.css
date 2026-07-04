@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Design tokens — Tailwind v4 theme
+   Palette: near-black void, electric cyan, plasma violet.
+   ============================================================ */
+@theme {
+  --color-void: #0a0a0f;
+  --color-panel: #12121c;
+  --color-electric: #00e5ff;
+  --color-plasma: #7c3aed;
+  --color-ghost: #a3a8bd; /* muted body copy */
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+body {
+  background: var(--color-void);
+  color: #fff;
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(0 229 255 / 0.25);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-electric);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Slim neon scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: #23233a;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(0 229 255 / 0.5);
+}
+
+/* Lenis smooth-scroll recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Custom cursor — system cursor is hidden only when the
+   JS cursor is active (fine pointer + motion allowed).
+   ============================================================ */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--color-electric);
+  pointer-events: none;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+.cursor-ring.is-hover {
+  border-color: rgb(0 229 255 / 0.9);
+}
+
+/* ============================================================
+   Reusable components
+   ============================================================ */
+@layer components {
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Frosted panel over the 3D scene */
+  .glass {
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    padding: 0.85rem 1.7rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .btn-primary {
+    background: var(--color-electric);
+    color: #041418;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 36px rgb(0 229 255 / 0.4);
+  }
+  .btn-ghost {
+    border: 1px solid rgb(255 255 255 / 0.18);
+    color: #fff;
+  }
+  .btn-ghost:hover {
+    border-color: rgb(0 229 255 / 0.6);
+    color: var(--color-electric);
+  }
+
+  /* Tech-tag chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+    color: var(--color-ghost);
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .chip:hover {
+    color: var(--color-electric);
+    border-color: rgb(0 229 255 / 0.5);
+    box-shadow: 0 0 18px rgb(0 229 255 / 0.15);
+  }
+
+  .text-gradient {
+    background: linear-gradient(92deg, var(--color-electric) 10%, var(--color-plasma) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Accessible skip link — visible only on keyboard focus */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 200;
+    transform: translateY(-300%);
+    background: var(--color-electric);
+    color: #041418;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+/* Subtle film-grain overlay above the whole page (4.5% opacity) */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
