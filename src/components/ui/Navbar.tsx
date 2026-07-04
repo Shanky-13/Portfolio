@@ -75,7 +75,7 @@ export function Navbar() {
           <Magnetic strength={0.3}>
             <a href={site.resumeUrl} download className="btn btn-primary !px-5 !py-2.5 text-sm">
               <Download size={15} aria-hidden />
-              Résumé
+              Resume
             </a>
           </Magnetic>
 

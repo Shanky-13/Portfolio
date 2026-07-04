@@ -53,7 +53,7 @@ export function Preloader({ onDone, reducedMotion }: PreloaderProps) {
       <div className="flex flex-col items-center gap-4">
         <span className="text-gradient text-2xl font-bold tracking-tight">S—S</span>
         <p className="text-xs tracking-[0.35em] text-ghost uppercase">
-          initialising signal field
+          Initialising Signal Field
         </p>
         {/* Charge bar */}
         <div className="h-px w-56 overflow-hidden bg-white/10">

@@ -80,7 +80,7 @@ export function Hero({ ready }: HeroProps) {
           </Magnetic>
           <Magnetic>
             <a href={site.resumeUrl} download className="btn btn-ghost">
-              Download résumé
+              Download resume
             </a>
           </Magnetic>
           <div className="ml-1">
