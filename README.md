@@ -37,35 +37,7 @@ Node 20+ recommended.
 
 ## 📁 Project structure
 
-```
-├── index.html                    # SEO/OG meta, fonts, JSON-LD, noscript fallback
-├── public/
-│   ├── favicon.svg               # waveform "S" mark
-│   ├── og-image.png              # PLACEHOLDER — swap with a real 1200×630 share image
-│   └── resume.pdf                # PLACEHOLDER — swap with your real résumé
-├── scripts/
-│   └── generate-placeholders.mjs # regenerates the two placeholder binaries
-└── src/
-    ├── data/content.ts           # ★ ALL site copy lives here — edit this file
-    ├── lib/
-    │   ├── gsap.ts               # single GSAP + ScrollTrigger registration
-    │   ├── smoothScroll.ts       # Lenis boot + scroll-progress tracking
-    │   ├── scrollState.ts        # render-free bridge: DOM scroll/mouse → shaders
-    │   └── utils.ts              # cx(), WebGL feature detection
-    ├── hooks/useMediaQuery.ts    # mobile / reduced-motion / coarse-pointer hooks
-    ├── components/
-    │   ├── canvas/               # the 3D layer (lazy-loaded)
-    │   │   ├── Experience.tsx    # <Canvas> root: DPR caps, fog, quality tiers
-    │   │   ├── SignalField.tsx   # 4-state morphing particle system
-    │   │   ├── shaders.ts        # GLSL: morph blend, EMG wave, cursor repulsion
-    │   │   ├── CircuitTraces.tsx # PCB-style background traces + via pads
-    │   │   ├── CameraRig.tsx     # scroll-driven Catmull-Rom camera rail
-    │   │   ├── Effects.tsx       # bloom / DoF / grain / vignette
-    │   │   └── StaticBackdrop.tsx# gradient fallback (no WebGL / while loading)
-    │   ├── ui/                   # cursor, magnetic, reveals, navbar, preloader…
-    │   └── sections/             # Hero, About, Skills, Projects, Achievements…
-    └── styles/index.css          # Tailwind v4 theme tokens + component classes
-```
+├── index.html                    # SEO/OG meta, fonts, JSON-LD, noscript fallback├── public/│   ├── favicon.svg               # waveform "S" mark│   ├── og-image.png              # PLACEHOLDER — swap with a real 1200×630 share image│   └── resume.pdf                # PLACEHOLDER — swap with your real résumé├── scripts/│   └── generate-placeholders.mjs # regenerates the two placeholder binaries└── src/├── data/content.ts           # ★ ALL site copy lives here — edit this file├── lib/│   ├── gsap.ts               # single GSAP + ScrollTrigger registration│   ├── smoothScroll.ts       # Lenis boot + scroll-progress tracking│   ├── scrollState.ts        # render-free bridge: DOM scroll/mouse → shaders│   └── utils.ts              # cx(), WebGL feature detection├── hooks/useMediaQuery.ts    # mobile / reduced-motion / coarse-pointer hooks├── components/│   ├── canvas/               # the 3D layer (lazy-loaded)│   │   ├── Experience.tsx    #  root: DPR caps, fog, quality tiers│   │   ├── SignalField.tsx   # 4-state morphing particle system│   │   ├── shaders.ts        # GLSL: morph blend, EMG wave, cursor repulsion│   │   ├── CircuitTraces.tsx # PCB-style background traces + via pads│   │   ├── CameraRig.tsx     # scroll-driven Catmull-Rom camera rail│   │   ├── Effects.tsx       # bloom / DoF / grain / vignette│   │   └── StaticBackdrop.tsx# gradient fallback (no WebGL / while loading)│   ├── ui/                   # cursor, magnetic, reveals, navbar, preloader…│   └── sections/             # Hero, About, Skills, Projects, Achievements…└── styles/index.css          # Tailwind v4 theme tokens + component classes
 
 ## ✏️ Customizing
 
