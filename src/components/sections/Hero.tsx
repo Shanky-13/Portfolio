@@ -45,7 +45,8 @@ export function Hero({ ready }: HeroProps) {
             text={site.lastName.toUpperCase()}
             play={ready}
             delay={0.4}
-            className="text-gradient block"
+            gradient
+            className="block"
           />
         </h1>
 

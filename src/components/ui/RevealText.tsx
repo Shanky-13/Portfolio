@@ -14,6 +14,13 @@ interface RevealTextProps {
    * boolean — externally controlled (the hero waits for the preloader).
    */
   play?: boolean | 'scroll'
+  /**
+   * Paints the cyan→violet brand gradient across the text. Applied per
+   * letter (with an offset background-position so it stays continuous)
+   * because `background-clip: text` on a parent breaks in Chromium when
+   * the letter spans animate with transforms.
+   */
+  gradient?: boolean
 }
 
 /**
@@ -28,6 +35,7 @@ export function RevealText({
   delay = 0,
   stagger = 0.018,
   play = 'scroll',
+  gradient = false,
 }: RevealTextProps) {
   const reduced = usePrefersReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
@@ -73,6 +81,28 @@ export function RevealText({
 
   const Tag = as as 'div'
   const words = text.split(' ')
+  const total = text.length
+
+  // Character offset of each word within the full string, so per-letter
+  // gradient slices line up into one continuous sweep.
+  let cursor = 0
+  const wordOffsets = words.map((w) => {
+    const o = cursor
+    cursor += w.length + 1
+    return o
+  })
+
+  const letterStyle = (index: number): React.CSSProperties | undefined =>
+    gradient
+      ? {
+          backgroundImage: 'linear-gradient(92deg, #00e5ff 10%, #7c3aed 90%)',
+          backgroundSize: `${total * 100}% 100%`,
+          backgroundPosition: total > 1 ? `${(index / (total - 1)) * 100}% 0%` : '0% 0%',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+        }
+      : undefined
 
   return (
     <Tag ref={ref} className={className} aria-label={text}>
@@ -83,7 +113,11 @@ export function RevealText({
           className="inline-block overflow-hidden align-bottom whitespace-pre pb-[0.08em] -mb-[0.08em]"
         >
           {(wi < words.length - 1 ? word + ' ' : word).split('').map((ch, ci) => (
-            <span key={ci} className={cx('rt-letter inline-block whitespace-pre will-change-transform')}>
+            <span
+              key={ci}
+              className={cx('rt-letter inline-block whitespace-pre will-change-transform')}
+              style={letterStyle(wordOffsets[wi] + ci)}
+            >
               {ch}
             </span>
           ))}
