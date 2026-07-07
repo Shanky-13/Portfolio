@@ -28,7 +28,7 @@ npm run dev        # dev server → http://localhost:5173
 npm run build      # type-check + production build → dist/
 npm run preview    # serve the production build locally
 
-**📁 Project Structure**
+📁 Project Structure
 The repository is modular and heavily optimized for lazy-loading 3D assets:
 
 ├── index.html                    # SEO/OG meta, fonts, JSON-LD, noscript fallback
@@ -48,20 +48,22 @@ The repository is modular and heavily optimized for lazy-loading 3D assets:
     │   └── sections/             # Hero, About, Skills, Projects, Achievements
     └── styles/index.css          # Tailwind v4 theme tokens + component classes
 
-**✏️ Customization Guide**
+✏️ Customization Guide
 Everything is designed to be easily modified from centralized files:
 
-| **What**                 | **Where to Edit**                                                                      |
+---------------------------------------------------------------------------------------------------------------------
+|        What              |                             Where to Edit                                              |
 | ------------------------ | -------------------------------------------------------------------------------------- |
-| **Site Copy & Projects** | `src/data/content.ts` — Fully typed and acts as the single source of truth.            |
-| **Résumé**               | Replace `public/resume.pdf`.                                                           |
-| **Share Image**          | Replace `public/og-image.png` (1200 × 630).                                            |
-| **Deployed URL**         | Update the `og:url` meta tag in `index.html` (marked `TODO`).                          |
-| **Project Previews**     | Swap `<ProjectArt />` in `Projects.tsx` for `<img>` screenshots.                       |
-| **Colors & Theme**       | Modify the `@theme` block in `src/styles/index.css`.                                   |
-| **3D Canvas Limits**     | Adjust particle counts or the camera path inside `Experience.tsx` and `CameraRig.tsx`. |
+| Site Copy & Projects     | `src/data/content.ts` — Fully typed and acts as the single source of truth.            |
+| Résumé                   | Replace `public/resume.pdf`.                                                           |
+| Share Image              | Replace `public/og-image.png` (1200 × 630).                                            |
+| Deployed URL             | Update the `og:url` meta tag in `index.html` (marked `TODO`).                          |
+| Project Previews         | Swap `<ProjectArt />` in `Projects.tsx` for `<img>` screenshots.                       |
+| Colors & Theme           | Modify the `@theme` block in `src/styles/index.css`.                                   |
+| 3D Canvas Limits         | Adjust particle counts or the camera path inside `Experience.tsx` and `CameraRig.tsx`. |
+---------------------------------------------------------------------------------------------------------------------
 
-**⚡ Performance & Accessibility**
+⚡ Performance & Accessibility
 -Optimized 3D: The entire three.js stack loads behind React.lazy, ensuring the DOM shell paints instantly. manualChunks splits the libraries into cacheable chunks. All particle blending and physics run directly in the vertex shader for zero per-frame JS allocation.  
 
 -Responsive Degradation: Mobile devices dynamically cap DPR at 1.5, reduce the particle count to 3,200, and disable depth-of-field. Antialiasing is natively disabled as bloom effectively hides aliasing.  
@@ -70,11 +72,11 @@ Everything is designed to be easily modified from centralized files:
 
 -Fallbacks & SEO: If a browser does not support WebGL, the site falls back to a readable gradient backdrop. Includes complete meta/OG/Twitter tags, JSON-LD Person schema, and a <noscript> contingency.
 
-**📦 Deployment**
+📦 Deployment
 Ready for fast deployment to static hosts like Vercel, Netlify, or GitHub Pages.
 ```````````````````````````````````````````````````
 npm run build   # Deploy the resulting dist/ folder
 ```````````````````````````````````````````````````
 
-**🌱 Future Expansion & Portfolio Growth**
+🌱 Future Expansion & Portfolio Growth
 While the current configuration is tightly focused on highlighting hardware and AI projects, a portfolio is only a fragment of your evolving body of work. The underlying architectural framework is built to easily scale and adapt. It effortlessly supports the introduction of projects that fall entirely outside the current scope—such as deploying full-stack web architectures, implementing cloud infrastructure, or directly rendering .gltf and .obj 3D models for entirely different fields of discovery.
