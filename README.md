@@ -1,29 +1,25 @@
 # Shashank Singh — 3D Portfolio
 
-> **Signal → Intelligence.** A cinematic, scroll-driven 3D portfolio for an ECE engineer
-> who builds where hardware meets AI — myoelectric prosthetics, computer-vision wearables,
-> and desktop AI assistants.
+> **Signal → Intelligence.** A cinematic, scroll-driven 3D portfolio for an ECE engineer who builds where hardware meets AI—showcasing work like the May 2026 thesis on an EMG-Controlled Robotic Hand System, computer-vision wearables, and desktop AI assistants.
 
-Built with **React 19 + Vite + TypeScript**, **React Three Fiber** (+ drei, postprocessing),
-**GSAP ScrollTrigger**, **Framer Motion**, **Lenis** smooth scroll and **Tailwind CSS v4**.
+Built for high-performance visual impact using **React 19 + Vite + TypeScript**, **React Three Fiber** (+ drei, postprocessing), **GSAP ScrollTrigger**, **Framer Motion**, **Lenis** smooth scroll, and **Tailwind CSS v4**.
 
 ---
 
-## ✨ The experience
+## ✨ The Experience
 
-- **Hero — "Signal Bloom":** ~9,000 GPU particles form a living EMG waveform (a nod to the
-  myoelectric arm) that scatters around your cursor like charge. Floating PCB traces drift
-  behind it. Name + title reveal letter-by-letter after a capacitor-charge preloader.
-- **Scroll story:** one fixed canvas; as you scroll, the particle field **morphs** —
-  waveform → neural constellation → data helix → circuit lattice — while the camera glides
-  along a Catmull-Rom rail, docking each section at a new angle.
-- **Sections:** About (stat wall) → Skills (marquee + grouped grid) → Projects (3D tilt
-  cards with glare, tech chips, impact lines) → Achievements (animated trophy wall) →
-  Education (animated CGPA meter) → Contact (giant mail CTA + copy-email).
-- **Micro-interactions:** custom cursor, magnetic buttons, scroll-linked letter reveals,
-  film grain, bloom + depth-of-field.
+* **Hero — "Signal Bloom":** ~9,000 GPU particles form a living EMG waveform (a direct nod to the myoelectric arm project) that scatters around your cursor like an electrical charge. Floating PCB traces drift in the background, with the name and title revealing letter-by-letter after a capacitor-charge preloader.
+* **Scroll Story:** One fixed canvas acts as the foundation. As you scroll, the particle field morphs (waveform → neural constellation → data helix → circuit lattice) while the camera glides along a Catmull-Rom rail, docking each section at a new dynamic angle.
+* **Sections:** * **About:** Statistics wall charting the engineering journey.
+  * **Skills:** Animated marquee and grouped grid detailing technical competencies.
+  * **Projects:** 3D tilt cards featuring tech chips, impact lines, and glare effects.
+  * **Achievements & Education:** Animated trophy wall and CGPA meter.
+  * **Contact:** Giant mail CTA with one-click copy functionality.
+* **Micro-interactions:** Custom cursor, magnetic buttons, scroll-linked letter reveals, film grain, bloom, and depth-of-field.
 
-## 🚀 Quick start
+## 🚀 Quick Start
+
+*Ensure you have Node 20+ installed.*
 
 ```bash
 npm install        # install dependencies
@@ -31,47 +27,54 @@ npm run assets     # (re)generate placeholder og-image.png + resume.pdf
 npm run dev        # dev server → http://localhost:5173
 npm run build      # type-check + production build → dist/
 npm run preview    # serve the production build locally
-```
 
-Node 20+ recommended.
+**📁 Project Structure**
+The repository is modular and heavily optimized for lazy-loading 3D assets:
 
-## 📁 Project structure
+├── index.html                    # SEO/OG meta, fonts, JSON-LD, noscript fallback
+├── public/
+│   ├── favicon.svg               # waveform "S" mark
+│   ├── og-image.png              # PLACEHOLDER — swap with a real 1200×630 share image
+│   └── resume.pdf                # PLACEHOLDER — swap with your real résumé
+├── scripts/
+│   └── generate-placeholders.mjs # regenerates the two placeholder binaries
+└── src/
+    ├── data/content.ts           # ★ ALL site copy lives here — edit this file
+    ├── lib/                      # utilities, GSAP registration, smooth scroll setup
+    ├── hooks/useMediaQuery.ts    # mobile / reduced-motion / coarse-pointer hooks
+    ├── components/
+    │   ├── canvas/               # the 3D layer (lazy-loaded), WebGL components, and GLSL shaders
+    │   ├── ui/                   # cursor, magnetic buttons, reveals, navbar, preloader
+    │   └── sections/             # Hero, About, Skills, Projects, Achievements
+    └── styles/index.css          # Tailwind v4 theme tokens + component classes
 
-├── index.html                    # SEO/OG meta, fonts, JSON-LD, noscript fallback├── public/│   ├── favicon.svg               # waveform "S" mark│   ├── og-image.png              # PLACEHOLDER — swap with a real 1200×630 share image│   └── resume.pdf                # PLACEHOLDER — swap with your real résumé├── scripts/│   └── generate-placeholders.mjs # regenerates the two placeholder binaries└── src/├── data/content.ts           # ★ ALL site copy lives here — edit this file├── lib/│   ├── gsap.ts               # single GSAP + ScrollTrigger registration│   ├── smoothScroll.ts       # Lenis boot + scroll-progress tracking│   ├── scrollState.ts        # render-free bridge: DOM scroll/mouse → shaders│   └── utils.ts              # cx(), WebGL feature detection├── hooks/useMediaQuery.ts    # mobile / reduced-motion / coarse-pointer hooks├── components/│   ├── canvas/               # the 3D layer (lazy-loaded)│   │   ├── Experience.tsx    #  root: DPR caps, fog, quality tiers│   │   ├── SignalField.tsx   # 4-state morphing particle system│   │   ├── shaders.ts        # GLSL: morph blend, EMG wave, cursor repulsion│   │   ├── CircuitTraces.tsx # PCB-style background traces + via pads│   │   ├── CameraRig.tsx     # scroll-driven Catmull-Rom camera rail│   │   ├── Effects.tsx       # bloom / DoF / grain / vignette│   │   └── StaticBackdrop.tsx# gradient fallback (no WebGL / while loading)│   ├── ui/                   # cursor, magnetic, reveals, navbar, preloader…│   └── sections/             # Hero, About, Skills, Projects, Achievements…└── styles/index.css          # Tailwind v4 theme tokens + component classes
+**✏️ Customization Guide**
+Everything is designed to be easily modified from centralized files:
 
-## ✏️ Customizing
+| **What**                 | **Where to Edit**                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| **Site Copy & Projects** | `src/data/content.ts` — Fully typed and acts as the single source of truth.            |
+| **Résumé**               | Replace `public/resume.pdf`.                                                           |
+| **Share Image**          | Replace `public/og-image.png` (1200 × 630).                                            |
+| **Deployed URL**         | Update the `og:url` meta tag in `index.html` (marked `TODO`).                          |
+| **Project Previews**     | Swap `<ProjectArt />` in `Projects.tsx` for `<img>` screenshots.                       |
+| **Colors & Theme**       | Modify the `@theme` block in `src/styles/index.css`.                                   |
+| **3D Canvas Limits**     | Adjust particle counts or the camera path inside `Experience.tsx` and `CameraRig.tsx`. |
 
-| What | Where |
-|---|---|
-| Any text, link, project, skill, achievement | `src/data/content.ts` — one file, fully typed |
-| Résumé | Replace `public/resume.pdf` |
-| Share image | Replace `public/og-image.png` (1200×630) |
-| Deployed URL | `og:url` in `index.html` (marked `TODO`) |
-| Project previews | Swap `<ProjectArt/>` in `Projects.tsx` for `<img>` screenshots (placeholders are watermarked) |
-| Colors | `@theme` block in `src/styles/index.css` |
-| Particle counts / camera path | `Experience.tsx` / `CameraRig.tsx` |
+**⚡ Performance & Accessibility**
+-Optimized 3D: The entire three.js stack loads behind React.lazy, ensuring the DOM shell paints instantly. manualChunks splits the libraries into cacheable chunks. All particle blending and physics run directly in the vertex shader for zero per-frame JS allocation.  
 
-## ⚡ Performance & accessibility
+-Responsive Degradation: Mobile devices dynamically cap DPR at 1.5, reduce the particle count to 3,200, and disable depth-of-field. Antialiasing is natively disabled as bloom effectively hides aliasing.  
 
-- **Lazy 3D:** the entire three.js stack loads behind `React.lazy` — the DOM shell paints
-  first; `manualChunks` splits three/r3f/motion into cacheable chunks.
-- **60fps budget:** all particle blending/physics runs in the vertex shader (zero per-frame
-  JS allocation); DPR capped at 2 (1.5 mobile); mobile drops to 3,200 particles and skips
-  DoF/grain; antialias off (bloom hides aliasing).
-- **`prefers-reduced-motion`:** Lenis, cursor, magnetic, tilt, marquee, letter reveals and
-  the camera rail all disable; the canvas renders a single static frame (`frameloop="demand"`).
-- **No WebGL?** Graceful gradient backdrop — content is fully readable.
-- **A11y:** semantic landmarks, skip-link, keyboard-focus styles, `aria-label`s on icon
-  links, screen-reader-safe letter reveals (intact `aria-label`, letters `aria-hidden`).
-- **SEO:** full meta/OG/Twitter set, JSON-LD `Person` schema, `<noscript>` fallback.
+-Accessibility (prefers-reduced-motion): Smooth scrolling, custom cursors, magnetic buttons, tilts, and camera rails gracefully disable. The canvas renders a single safe static frame (frameloop="demand"). Fully compliant with semantic landmarks, skip-links, and screen-reader-safe letter reveals.  
 
-## 📦 Deploying
+-Fallbacks & SEO: If a browser does not support WebGL, the site falls back to a readable gradient backdrop. Includes complete meta/OG/Twitter tags, JSON-LD Person schema, and a <noscript> contingency.
 
-Any static host works (Vercel / Netlify / GitHub Pages):
+**📦 Deployment**
+Ready for fast deployment to static hosts like Vercel, Netlify, or GitHub Pages.
+```````````````````````````````````````````````````
+npm run build   # Deploy the resulting dist/ folder
+```````````````````````````````````````````````````
 
-```bash
-npm run build   # then deploy dist/
-```
-
-Before going live: swap the two placeholder files, set `og:url`, and point the project
-card links at their real repos (marked `TODO` in `content.ts`).
+**🌱 Future Expansion & Portfolio Growth**
+While the current configuration is tightly focused on highlighting hardware and AI projects, a portfolio is only a fragment of your evolving body of work. The underlying architectural framework is built to easily scale and adapt. It effortlessly supports the introduction of projects that fall entirely outside the current scope—such as deploying full-stack web architectures, implementing cloud infrastructure, or directly rendering .gltf and .obj 3D models for entirely different fields of discovery.
